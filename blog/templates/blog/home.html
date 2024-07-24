@@ -1,0 +1,30 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <a class="contenu">Bonjour</a>
+    <br>
+    <a class="contenu">J'ai fait {{ unites }} au prix de {{ prix }} dirhams pour aller à {{ ville }}.</a>
+    <a class="contenu" id="test">test:</a>
+
+    <form method="POST" action="{% url 'HOME' %}">
+        {% csrf_token %}
+        {{ form.ville }}
+        
+        {% if form.errors %}
+            <div class="errors">
+                <h2>Erreurs dans le formulaire :</h2>
+                <ul>
+                    {% for field in form %}
+                        {% if field.errors %}
+                            <li>{{ field.label }} : {{ field.errors }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+        <button type="submit" class="btn btn-primary">appui dessus</button>
+    </form>
+    
+    
+{% endblock %}

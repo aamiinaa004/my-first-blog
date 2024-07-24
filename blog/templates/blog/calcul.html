@@ -1,0 +1,47 @@
+{% extends 'blog/base.html' %}
+
+{% block titre %}
+    <a class="ti">Calcule</a>
+{% endblock %}
+
+{% block main %}
+    <p class="contenu">Bienvenue sur la page Calcule ! <br>
+    Vous êtes sur le point de découvrir un outil puissant conçu pour simplifier vos calculs et analyses. Que vous ayez besoin de faire des calculs rapides, de résoudre des équations complexes ou d'explorer des données, cette page est faite pour vous.
+    Nous avons mis en place des fonctionnalités intuitives pour vous aider à obtenir des résultats précis et efficaces. Si vous avez des questions ou besoin d'assistance, notre équipe est là pour vous accompagner.</p>
+
+    <form id="calculeForm">
+        <label for="prix">Entrez le prix :</label><br>
+        <input type="number" id="prix" name="prix" step="0.01" value="0" required><br><br>
+        
+        <label for="unit">Entrez le nombre d'unité :</label><br>
+        <input type="number" id="unit" name="unit" step="1" value="0" required><br><br>
+        
+        <label for="reduction">Entrez la réduction :</label><br>
+        <input type="number" id="reduction" name="reduction" step="0.01" value="0" required><br><br>
+        
+        <input type="submit" value="Submit" class="btn btn-primary"><br><br>
+        
+        <label for="result">Resultat :</label><br>
+        <input type="number" id="result" name="result" step="0.01" value="0" readonly><br><br>
+    </form>
+{% endblock %}
+
+{% block js %}
+<script>
+document.getElementById("calculeForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Empêche la soumission du formulaire
+
+    // Récupérer les valeurs des inputs
+    var prix = parseFloat(document.getElementById("prix").value);
+    var unit = parseInt(document.getElementById("unit").value);
+    var reduction = parseFloat(document.getElementById("reduction").value);
+
+    // Calculer le résultat
+    var total = prix * unit;
+    var result = total - (total * (reduction / 100));
+
+    // Assigner le résultat à l'input résultat
+    document.getElementById("result").value = result.toFixed(2);
+});
+</script>    
+{% endblock %}
